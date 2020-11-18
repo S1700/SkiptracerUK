@@ -6,7 +6,7 @@ Nothing big just a fun project :)
 
 Use:
 
-1. Download the repository with 'git clone '
+1. Download the repository with 'git clone https://github.com/Samuel20354/SkiptracerUK.git'
 2. cd SkiptracerUK
 3. python3 SkiptracerUK.py
 
