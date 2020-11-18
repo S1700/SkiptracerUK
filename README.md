@@ -12,4 +12,4 @@ Nothing big just a fun project :)
 
 Done!
 
-Credit to Critical-Function956 over at reddit for helping me out
+### Credit to Critical-Function956 over at reddit for helping me out
