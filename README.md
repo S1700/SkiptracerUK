@@ -4,7 +4,8 @@ Like Skiptracer but for the uk.
 SkiptracerUK peforms recon attacks and finds information about a target. SkiptracerUK mainly uses basic python webscraping.
 
 
-#What can it do:
+# What can it do:
+
 Skiptracer will alow you to search with the following queries:
 
 * UK car plate search
@@ -22,7 +23,7 @@ More search queries coming soon!
 
 Done, enjoy SkiptracerUK!
 
-#Bugs that I know of:
+# Bugs that I know of:
 
 * `FileNotFoundError: [Errno 2] No such file or directory: 'plugins/'` this bug is temporary just run SkiptracerUK again, and it should be fixed. Idk why it happens.
 * When exiting using the method in the script it some times doesn't exit just use the same method again and it will exit. 
