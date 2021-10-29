@@ -1,3 +1,4 @@
+![Supported Python version](https://img.shields.io/badge/python-3.7+-blue.svg)
 [![Code Quality Score](https://www.code-inspector.com/project/12/score/svg)](https://www.code-inspector.com/public/project/12/POK/dashboard)
 
 # Description:
