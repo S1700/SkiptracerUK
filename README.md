@@ -1,3 +1,5 @@
+[![Code Quality Score](https://www.code-inspector.com/project/12/score/svg)](https://www.code-inspector.com/public/project/12/POK/dashboard)
+
 # Description:
  
 Like Skiptracer but for the uk.
