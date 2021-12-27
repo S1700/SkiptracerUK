@@ -26,17 +26,6 @@ def lookup():
 
     os.system("clear")
 
-    print("Getting info...")
-
-    # for people that think the loading bar is useless it gives the script time to pull all the information
-    # people with slow connection gets errors with out it so plz don't remove it
-    animation = ["[■□□□□□□□□□]", "[■■□□□□□□□□]", "[■■■□□□□□□□]", "[■■■■□□□□□□]", "[■■■■■□□□□□]", "[■■■■■■□□□□]",
-                 "[■■■■■■■□□□]", "[■■■■■■■■□□]", "[■■■■■■■■■□]", "[■■■■■■■■■■]"]
-
-    for i in range(len(animation)):
-        time.sleep(0.2)
-        sys.stdout.write("\r" + animation[i % len(animation)])
-        sys.stdout.flush()
 
     print("\n")
 
@@ -79,11 +68,7 @@ def lookup():
     print(Fore.RED + "Currency: " + Fore.RESET + dict1["currency"])
     print(Fore.RED + "Currency name: " + Fore.RESET + dict1["currency_name"])
     print(Fore.RED + "Languages: " + Fore.RESET + dict1["languages"])
-    country_population = str(dict1["country_population"])
-    print(Fore.RED + "Country population: " + Fore.RESET + country_population)
-    print("")
-    print(Fore.GREEN + "Done!" + Fore.RESET)
-    print("")
+    print(Fore.GREEN + "\nDone!\n" + Fore.RESET)
     input(Fore.BLUE + "Press Enter to continue..." + Fore.RESET)
 
 

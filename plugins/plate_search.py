@@ -1,40 +1,54 @@
 import requests
 from bs4 import BeautifulSoup
-import time
-import sys
 from colorama import Fore
 import re
 import os
-
+import time
 
 def plate():
+    # Some global variables cuz python is a pain:
+    global gearbox, vehicle_type, model, make, colour, engine_size, fuel_type, top_speed, zero_to_sixty, top_speed, bhp, reg_location
+
     os.system("clear")
 
     print("This is a script (made by me) that finds quite a lot of information about a car using the car plate.")
     print("Please type the UK car plate in LOWERCASE (xxxxxxx)")
+    print("-")
 
     try:
-        num = str(input("OPTION: "))
+        plate = str(input("OPTION: "))
         print("")
-
-        plate = num
 
     except KeyboardInterrupt:
         print("\nCanceled by user \n")
 
     url = "https://www.rapidcarcheck.co.uk/results?RegPlate=" + plate
+    url2 = "https://www.checkcardetails.co.uk/cardetails/" + plate
+    #url3 = "https://www.caranalytics.co.uk/select-product/" + plate
 
     resp = requests.get(url)
     soup = BeautifulSoup(resp.text, 'html.parser')
 
+    resp2 = requests.get(url2)
+    soup2 = BeautifulSoup(resp2.text, 'html.parser')
+
     p_lst = soup.select("p")
     d_lst = soup.select("div")
+    tr_lst = soup2.select("tr")
+
+    # General car plate info URL and URL2
 
     for p in p_lst:
         match = re.match("Reg: (.*)", p.text)
 
         if match:
             reg = match.group(1)
+
+    for tr in tr_lst:
+        match = re.match("Registration Place(.*)", tr.text)
+
+        if match:
+            reg_location = match.group(1)
 
     for p in p_lst:
         match = re.match("Make: (.*)", p.text)
@@ -59,6 +73,12 @@ def plate():
 
         if match:
             engine_size = match.group(1)
+
+    for tr in tr_lst:
+        match = re.match("Transmission(.*)", tr.text)
+
+        if match:
+            transmission = match.group(1)
 
     for p in p_lst:
         match = re.match("Colour: (.*)", p.text)
@@ -108,50 +128,100 @@ def plate():
         if match:
             registered_date = match.group(1)
 
+    for tr in tr_lst:
+        match = re.match("Exported(.*)", tr.text)
+
+        if match:
+            exported = match.group(1)
+
     os.system("clear")
-
-    print("Getting info...")
-
-    # for people that think the loading bar is useless it gives the script time to pull all the information
-    # people with slow connection gets errors with out it so plz don't remove it
-    animation = ["[■□□□□□□□□□]", "[■■□□□□□□□□]", "[■■■□□□□□□□]", "[■■■■□□□□□□]", "[■■■■■□□□□□]", "[■■■■■■□□□□]",
-                 "[■■■■■■■□□□]", "[■■■■■■■■□□]", "[■■■■■■■■■□]", "[■■■■■■■■■■]"]
-
-    for i in range(len(animation)):
-        time.sleep(0.3)
-        sys.stdout.write("\r" + animation[i % len(animation)])
-        sys.stdout.flush()
-
-    print("\n")
-
-    print("")
-    print(Fore.RED + "Vehicle Information:" + Fore.RESET)
-    print("")
 
     try:
         reg
     except NameError:
-        print(Fore.RED + "Could not get info, check if the licence plate is correct." + Fore.RESET)
+        print(Fore.RED + "\nCould not get info, check if the licence plate is correct.\n" + Fore.RESET)
+        quit()
     else:
+        print(Fore.RED + "\nVehicle Information:\n" + Fore.RESET)
         print("Reg: " + reg)
-        print("Make: " + make)
-        print("Model: " + model)
-        print("Vehicle Type: " + vehicle_type)
-        print("Colour: " + colour)
-        print("Engine Size: " + engine_size)
-        print("Fuel Type: " + fuel_type)
-        print("Top Speed: " + top_speed)
-        print("0-60 MPH: " + zero_to_sixty)
-        print("BHP: " + bhp)
-        print("AVG Yearly Mileage: " + yearly_mileage)
-        print("Vehicle Age: " + vehicle_age)
-        print("Year: " + registered_date)
+
+        if reg_location == "N/A":
+            print("Registration Location: " + Fore.RED + "Not Available" + Fore.RESET)
+        else:
+            print("Registration Location: " + reg_location)
+
+        if make == "Not Available":
+            print("Make: " + Fore.RED + "Not Available" + Fore.RESET)
+        else:
+            print("Make: " + make)
+            
+            if model == "Not Available":
+                print("Model: " + Fore.RED + "Not Available" + Fore.RESET)
+            else:
+                print("Model: " + model)
+
+                if vehicle_type == "Not Available":
+                    print("Vehicle Type: " + Fore.RED + "Not Available" + Fore.RESET)
+                else:
+                    print("Vehicle Type: " + vehicle_type)
+
+                if colour == "Not Available":
+                    print("Colour: " + Fore.RED + "Not Available" + Fore.RESET)
+                else:
+                    print("Colour: " + colour)
+
+                if engine_size == "Not Available":
+                    print("Engine Size: " + Fore.RED + "Not Available" + Fore.RESET)
+                else:
+                    print("Engine Size: " + engine_size)
+
+                if transmission == "N/A" or transmission == "":
+                    print("Transmission: " + Fore.RED + "Not Available" + Fore.RESET)
+                else:
+                    print("Transmission: " + transmission)
+
+                if fuel_type == "Not Available":
+                    print("Fuel Type: " + Fore.RED + "Not Available" + Fore.RESET)
+                else:
+                    print("Fuel Type: " + fuel_type)
+
+                if top_speed == "Not Available":
+                    print("Top Speed: " + Fore.RED + "Not Available" + Fore.RESET)
+                else:
+                    print("Top Speed: " + top_speed)
+
+                if zero_to_sixty == "Not Available":
+                    print("0-60 MPH: " + Fore.RED + "Not Available" + Fore.RESET)
+                else:
+                    print("0-60 MPH: " + zero_to_sixty)
+
+                if bhp == "Not Available":
+                    print("BHP: " + Fore.RED + "Not Available" + Fore.RESET)
+                else:
+                    print("BHP: " + bhp)
+
+                if yearly_mileage == "Not Available":
+                    print("AVG Yearly Mileage: " + Fore.RED + "Not Available" + Fore.RESET)
+                else:
+                    print("AVG Yearly Mileage: " + yearly_mileage)
+            
+                if vehicle_age == "Not Available":
+                    print("Vehicle Age: " + Fore.RED + "Not Available" + Fore.RESET)
+                else:
+                    print("Vehicle Age: " + vehicle_age)
+
+                if registered_date == "Not Available":
+                    print("Registered Year: " + Fore.RED + "Not Available" + Fore.RESET)
+                else:
+                    print("Registered Year: " + registered_date)
+
+                if exported == "N/A":
+                    print("Exported: " + Fore.RED + "Not Available" + Fore.RESET)
+                else:
+                    print("Exported: " + exported)
 
 
-    print("")
-    print("")
-    print(Fore.RED + "MOT & Tax Information:" + Fore.RESET)
-    print("")
+    print(Fore.RED + "\n\nMOT & Tax Information:\n" + Fore.RESET)
 
     for p in p_lst:
         match = re.match("Previous MOT Records: (.*)", p.text)
@@ -229,6 +299,7 @@ def plate():
         print("Estimated Total Mileage Now: " + est_total_mileage)
 
     print("")
+    print("")
     print(Fore.GREEN + "Done!" + Fore.RESET)
     print("")
     input(Fore.BLUE + "Press Enter to continue..." + Fore.RESET)
@@ -236,5 +307,3 @@ def plate():
 
 if __name__ == "__main__":
     plate()
-
-

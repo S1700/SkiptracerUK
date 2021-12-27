@@ -54,7 +54,7 @@ def main_menu():
         print(" -")
         print("Invalid option, please try again.")
         print(" -")
-        time.sleep(5)
+        time.sleep(3)
         main_menu()
 
 
