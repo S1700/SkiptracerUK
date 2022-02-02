@@ -12,24 +12,23 @@ def plate():
     os.system("clear")
 
     print("This is a script (made by me) that finds quite a lot of information about a car using the car plate.")
-    print("Please type the UK car plate in LOWERCASE (xxxxxxx)")
+    print("Please type the UK car plate (make sure there are no spaces in the plate)")
     print("-")
 
     try:
-        plate = str(input("OPTION: "))
-        print("")
+        plate = str(input("OPTION: \n"))
 
     except KeyboardInterrupt:
         print("\nCanceled by user \n")
 
-    url = "https://www.rapidcarcheck.co.uk/results?RegPlate=" + plate
-    url2 = "https://www.checkcardetails.co.uk/cardetails/" + plate
-    #url3 = "https://www.caranalytics.co.uk/select-product/" + plate
+    plate_url = "https://www.rapidcarcheck.co.uk/results?RegPlate=" + plate
+    plate_url2 = "https://www.checkcardetails.co.uk/cardetails/" + plate
+    #plate_url3 = "https://www.caranalytics.co.uk/select-product/" + plate
 
-    resp = requests.get(url)
+    resp = requests.get(plate_url)
     soup = BeautifulSoup(resp.text, 'html.parser')
 
-    resp2 = requests.get(url2)
+    resp2 = requests.get(plate_url2)
     soup2 = BeautifulSoup(resp2.text, 'html.parser')
 
     p_lst = soup.select("p")
@@ -259,10 +258,8 @@ def plate():
     print("TAX Due Date: " + tax_due_date)
     print("Emissions: " + emissions)
 
-    print("")
-    print("")
-    print(Fore.RED + "Mileage Stats:" + Fore.RESET)
-    print("")
+
+    print(Fore.RED + "\n\nMileage Stats:\n" + Fore.RESET)
 
     for p in d_lst:
         match = re.match("Total Mileage Records: (.*)", p.text.strip())
@@ -298,11 +295,8 @@ def plate():
         print("AVG Yearly Mileage: " + avg_yearly_mileage)
         print("Estimated Total Mileage Now: " + est_total_mileage)
 
-    print("")
-    print("")
-    print(Fore.GREEN + "Done!" + Fore.RESET)
-    print("")
-    input(Fore.BLUE + "Press Enter to continue..." + Fore.RESET)
+    print(Fore.GREEN + "\n\nDone!" + Fore.RESET)
+    input(Fore.BLUE + "\nPress Enter to continue..." + Fore.RESET)
 
 
 if __name__ == "__main__":
