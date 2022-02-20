@@ -28,12 +28,12 @@ Done, enjoy SkiptracerUK!
 # What I hope to add:
 
 * UK name search
-* VIN finder to the plate search
+* ~VIN finder to the plate search~ (Turns out that it is illegal to get a car's VIN without a cause. Read more [here](https://www.gov.uk/data-requests-dvla))
 * Phone number look up
 
-# Bugs that I know of:
+# Bugs that I know of and how to fix them:
 
-* `FileNotFoundError: [Errno 2] No such file or directory: 'plugins/'` this bug is temporary just run SkiptracerUK again, and it should be fixed. Idk why it happens.
+* `FileNotFoundError: [Errno 2] No such file or directory: 'plugins/'` try just run SkiptracerUK again, and it should be fixed. Idk why it happens.
 * When exiting using the method in the script it some times doesn't exit just use the same method again and it will exit. 
 * Some times when running plate or ip search it wont return you back to the menu just run the script again.
 
